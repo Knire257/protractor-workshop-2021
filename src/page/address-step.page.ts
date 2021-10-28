@@ -7,7 +7,7 @@ export class AddressStepPage {
     this.btnProceedToCheckOut = $("button[name='processAddress']");
   }
 
-  public async addToCart(): Promise<void> {
+  public async proceedToCheckOut(): Promise<void> {
     await this.btnProceedToCheckOut.click();
   }
 }

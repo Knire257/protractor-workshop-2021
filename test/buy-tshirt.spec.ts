@@ -18,22 +18,45 @@ describe('Buy a t-shirt', () => {
   const signInStepPage: SignInStepPage = new SignInStepPage();
   const summaryStepPage: SummaryStepPage = new SummaryStepPage();
 
-  it('then should be bought a t-shirt', async () => {
+  describe('then should be bought a t-shirt', async () => {
+    describe('then sholud get the page', () => {
+      browser.get('http://automationpractice.com/');
+    });
+    describe('then should select a t-shirt', () => {
+      menuContentPage.goToTShirtMenu();
+      productListPage.addTShirtToCart();
+      productListPage.addTShirtToCart();
+      productAddedModalPage.proceedToCheckout();
+      orderSummaryPage.confirmPurchase();
+    });
+    describe('then should sign in an user', () => {
+      signInStepPage.sendUserData('aperdomobo@gmail.com', 'WorkshopProtractor');
+    });
+    describe('then it should let the adress by default and continue', () => {
+      addressStepPage.proceedToCheckOut();
+      shippingStepPage.agreeTerms();
+      shippingStepPage.proceedToPayment();
+    });
+    describe('then the purchase must be paid', () => {
+      paymentStepPage.proceedToBank();
+      bankPaymentPage.confirmPurchase();
+      expect(summaryStepPage.getPurchaseSummary()).toString() === ('Your order on My Store is complete.');
+    });
+    /*
     await browser.get('http://automationpractice.com/');
 
     await menuContentPage.goToTShirtMenu();
-    // await (browser.sleep(3000));
+
     await productListPage.addTShirtToCart();
-    // await (browser.sleep(3000));
+
     await productAddedModalPage.proceedToCheckout();
-    // await (browser.sleep(3000));
+
     await orderSummaryPage.confirmPurchase();
-    // await (browser.sleep(3000));
 
     await signInStepPage.sendUserData('aperdomobo@gmail.com', 'WorkshopProtractor');
     // await (browser.sleep(3000));
 
-    await addressStepPage.addToCart();
+    await addressStepPage.proceedToCheckOut();
     // await (browser.sleep(3000));
 
     await shippingStepPage.agreeTerms();
@@ -46,6 +69,8 @@ describe('Buy a t-shirt', () => {
     await bankPaymentPage.confirmPurchase();
     // await (browser.sleep(3000));
 
-    await expect(summaryStepPage.getPurchaseSummary()).toString() === ('Your order on My Store is complete.');
+    await expect(summaryStepPage.getPurchaseSummary()).toString() ===
+     ('Your order on My Store is complete.');
+     */
   });
 });
