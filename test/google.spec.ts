@@ -1,3 +1,4 @@
+/*
 import { browser } from 'protractor';
 
 describe('Given a SDET learning protractor', () => {
@@ -11,3 +12,4 @@ describe('Given a SDET learning protractor', () => {
     });
   });
 });
+*/

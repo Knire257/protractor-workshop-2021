@@ -10,4 +10,8 @@ export class AddressStepPage {
   public async proceedToCheckOut(): Promise<void> {
     await this.btnProceedToCheckOut.click();
   }
+
+  public getBtnProceedToChackOut() : ElementFinder {
+    return this.btnProceedToCheckOut;
+  }
 }

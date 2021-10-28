@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, ExpectedConditions } from 'protractor';
 
 import {
   MenuContentPage, AddressStepPage, BankPaymentPage, OrderSummaryPage,
@@ -7,6 +7,10 @@ import {
 } from '../src/page';
 
 describe('Buy a t-shirt', () => {
+  const expConds = ExpectedConditions;
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
+  });
   const menuContentPage: MenuContentPage = new MenuContentPage();
   const addressStepPage: AddressStepPage = new AddressStepPage();
   const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
@@ -19,27 +23,28 @@ describe('Buy a t-shirt', () => {
   const summaryStepPage: SummaryStepPage = new SummaryStepPage();
 
   describe('then should be bought a t-shirt', async () => {
-    describe('then sholud get the page', () => {
-      browser.get('http://automationpractice.com/');
+    describe('then sholud get the page', async() => {
+      await browser.get('http://automationpractice.com/');
     });
-    describe('then should select a t-shirt', () => {
-      menuContentPage.goToTShirtMenu();
-      productListPage.addTShirtToCart();
-      productListPage.addTShirtToCart();
-      productAddedModalPage.proceedToCheckout();
-      orderSummaryPage.confirmPurchase();
+    describe('then should select a t-shirt', async() => {
+      await browser.wait(expConds.elementToBeClickable(menuContentPage.getButton()));
+      await menuContentPage.goToTShirtMenu();
+      await productListPage.addTShirtToCart();
+      await productListPage.addTShirtToCart();
+      await productAddedModalPage.proceedToCheckout();
+      await orderSummaryPage.confirmPurchase();
     });
-    describe('then should sign in an user', () => {
-      signInStepPage.sendUserData('aperdomobo@gmail.com', 'WorkshopProtractor');
+    describe('then should sign in an user', async() => {
+      await signInStepPage.sendUserData('aperdomobo@gmail.com', 'WorkshopProtractor');
     });
-    describe('then it should let the adress by default and continue', () => {
-      addressStepPage.proceedToCheckOut();
-      shippingStepPage.agreeTerms();
-      shippingStepPage.proceedToPayment();
+    describe('then it should let the adress by default and continue', async() => {
+      await addressStepPage.proceedToCheckOut();
+      await shippingStepPage.agreeTerms();
+      await shippingStepPage.proceedToPayment();
     });
-    describe('then the purchase must be paid', () => {
-      paymentStepPage.proceedToBank();
-      bankPaymentPage.confirmPurchase();
+    describe('then the purchase must be paid', async() => {
+      await paymentStepPage.proceedToBank();
+      await bankPaymentPage.confirmPurchase();
       expect(summaryStepPage.getPurchaseSummary()).toString() === ('Your order on My Store is complete.');
     });
     /*
