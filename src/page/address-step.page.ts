@@ -4,10 +4,10 @@ export class AddressStepPage {
   private btnProceedToCheckOut: ElementFinder;
 
   constructor () {
-    this.btnProceedToCheckOut = $('#center_column > form > p > button > span');
+    this.btnProceedToCheckOut = $("button[name='processAddress']");
   }
 
-  public async addToCart(): Promise<void> {
+  public async proceedToCheckOut(): Promise<void> {
     await this.btnProceedToCheckOut.click();
   }
 }

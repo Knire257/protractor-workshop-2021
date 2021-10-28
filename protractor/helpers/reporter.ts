@@ -5,4 +5,13 @@ export let reporter = () => {
       displayStacktrace: StacktraceOption.PRETTY
     }
   }));
+  const { AwesomeReport } = require('jasmine-awesome-report');
+
+  const config = {
+    fullPath: 'awesome-report',
+    fileName: 'report',
+    merge: true
+  };
+
+  jasmine.getEnv().addReporter(AwesomeReport.getReport(config));
 };

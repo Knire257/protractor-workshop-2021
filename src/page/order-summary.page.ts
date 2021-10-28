@@ -4,7 +4,7 @@ export class OrderSummaryPage {
   private btnConfirmPurchase: ElementFinder;
 
   constructor () {
-    this.btnConfirmPurchase = $('.cart_navigation span');
+    this.btnConfirmPurchase = $('[name="processAddress"]');
   }
 
   public async confirmPurchase(): Promise<void> {

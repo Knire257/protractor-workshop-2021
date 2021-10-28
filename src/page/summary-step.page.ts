@@ -4,7 +4,8 @@ export class SummaryStepPage {
   private textSummaryPurchase: ElementFinder;
 
   constructor () {
-    this.textSummaryPurchase = $('#center_column > div > p > strong');
+    // this.textSummaryPurchase = $('.standard-checkout');
+    this.textSummaryPurchase = $('p strong.dark');
   }
 
   public async getPurchaseSummary(): Promise<void> {
