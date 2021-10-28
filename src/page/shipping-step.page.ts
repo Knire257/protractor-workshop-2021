@@ -5,8 +5,10 @@ export class ShippingStepPage {
   private btnProceedToPayment: ElementFinder;
 
   constructor () {
-    this.checkBoxAgreeTerms = $('#cgv');
-    this.btnProceedToPayment = $('#form > p > button > span');
+    // this.checkBoxAgreeTerms = $('input [name="cgv"]');
+    this.checkBoxAgreeTerms = $('[type="checkbox"]');
+    // this.btnProceedToPayment = $('button [name="processCarrier"]');
+    this.btnProceedToPayment = $('[name="processCarrier"]');
   }
 
   public async agreeTerms(): Promise<void> {
